@@ -3,6 +3,7 @@
     using UnityEngine;
     using VUDK.Generic.Serializable;
 
+    [DefaultExecutionOrder(-100)]
     public class PoolsManager : MonoBehaviour
     {
         [field: SerializeField]

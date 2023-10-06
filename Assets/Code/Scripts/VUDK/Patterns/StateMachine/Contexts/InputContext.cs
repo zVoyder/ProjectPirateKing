@@ -2,9 +2,9 @@
 {
     public class InputContext : Context
     {
-        public Inputs Inputs { get; protected set; }
+        public InputsMap Inputs { get; protected set; }
 
-        public InputContext(Inputs inputs) : base()
+        public InputContext(InputsMap inputs) : base()
         {
             Inputs = inputs;
         }

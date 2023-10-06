@@ -4,12 +4,12 @@ namespace VUDK.Features.Main.InputSystem
 
     public class InputsManager
     {
-        public static Inputs Inputs;
+        public static InputsMap Inputs;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         private static void LoadInputs()
         {
-            Inputs = new Inputs();
+            Inputs = new InputsMap();
             Inputs.Enable();
         }
     }
