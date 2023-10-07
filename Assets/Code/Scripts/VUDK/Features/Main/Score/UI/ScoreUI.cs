@@ -4,7 +4,7 @@
     using TMPro;
     using VUDK.Features.Main.EventsSystem;
     using VUDK.Features.Main.EventsSystem.Events;
-    using VUDK.Generic.Managers;
+    using VUDK.Generic.Managers.GameManager;
 
     public class ScoreUI : MonoBehaviour
     {
@@ -20,14 +20,14 @@
 
         private void OnEnable()
         {
-            GameManager.Instance.EventManager.AddListener<int>(EventKeys.ScoreEvents.OnScoreChange, UpdateScoreText);
-            GameManager.Instance.EventManager.AddListener<int>(EventKeys.ScoreEvents.OnHighScoreChange, UpdateHighScoreText);
+            GameManager.GameState.EventManager.AddListener<int>(EventKeys.ScoreEvents.OnScoreChange, UpdateScoreText);
+            GameManager.GameState.EventManager.AddListener<int>(EventKeys.ScoreEvents.OnHighScoreChange, UpdateHighScoreText);
         }
 
         private void OnDisable()
         {
-            GameManager.Instance.EventManager.RemoveListener<int>(EventKeys.ScoreEvents.OnScoreChange, UpdateScoreText);
-            GameManager.Instance.EventManager.RemoveListener<int>(EventKeys.ScoreEvents.OnHighScoreChange, UpdateHighScoreText);
+            GameManager.GameState.EventManager.RemoveListener<int>(EventKeys.ScoreEvents.OnScoreChange, UpdateScoreText);
+            GameManager.GameState.EventManager.RemoveListener<int>(EventKeys.ScoreEvents.OnHighScoreChange, UpdateHighScoreText);
         }
 
         private void UpdateScoreText(int score)

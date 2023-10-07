@@ -3,8 +3,7 @@ namespace VUDK.UI.Menu
     using UnityEngine;
     using UnityEngine.InputSystem;
     using VUDK.Extensions.Time;
-    using VUDK.Generic.Managers;
-    using VUDK.Features.Main.EventsSystem;
+    using VUDK.Generic.Managers.GameManager;
     using VUDK.Features.Main.EventsSystem.Events;
     using VUDK.Features.Main.InputSystem;
 
@@ -46,7 +45,7 @@ namespace VUDK.UI.Menu
 
         public void EnablePause()
         {
-            GameManager.Instance.EventManager.TriggerEvent(EventKeys.PauseEvents.OnPauseEnter);
+            GameManager.GameState.EventManager.TriggerEvent(EventKeys.PauseEvents.OnPauseEnter);
             _isPaused = true;
             _pausePanel.gameObject.SetActive(true);
             TimeExtension.SetTimeScale(0f);
@@ -54,7 +53,7 @@ namespace VUDK.UI.Menu
 
         public void DisablePause()
         {
-            GameManager.Instance.EventManager.TriggerEvent(EventKeys.PauseEvents.OnPauseExit);
+            GameManager.GameState.EventManager.TriggerEvent(EventKeys.PauseEvents.OnPauseExit);
             _isPaused = false;
             _pausePanel.gameObject.SetActive(false);
             TimeExtension.SetTimeScale(1f);

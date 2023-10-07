@@ -38,6 +38,7 @@ namespace VUDK.Features.Main.InputSystem.MobileInputs
         {
             _isAnalogFollowing = false;
             ResetAnalogPosition();
+            OnInputCancelled?.Invoke();
         }
 
         private void AnalogFingerFollow()

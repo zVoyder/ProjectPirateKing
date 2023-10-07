@@ -2,7 +2,7 @@ namespace VUDK.Features.Main.Timer
 {
     using System.Collections;
     using UnityEngine;
-    using VUDK.Generic.Managers;
+    using VUDK.Generic.Managers.GameManager;
     using VUDK.Features.Main.EventsSystem;
     using VUDK.Features.Main.EventsSystem.Events;
 
@@ -22,13 +22,13 @@ namespace VUDK.Features.Main.Timer
         {
             do
             {
-                GameManager.Instance.EventManager.TriggerEvent(EventKeys.CountdownEvents.OnCountdownCount, time);
+                GameManager.GameState.EventManager.TriggerEvent(EventKeys.CountdownEvents.OnCountdownCount, time);
                 yield return new WaitForSeconds(1);
                 time--;
             } while (time > 0);
 
-            GameManager.Instance.EventManager.TriggerEvent(EventKeys.CountdownEvents.OnCountdownCount, time);
-            GameManager.Instance.EventManager.TriggerEvent(EventKeys.CountdownEvents.OnCountdownTimesUp);
+            GameManager.GameState.EventManager.TriggerEvent(EventKeys.CountdownEvents.OnCountdownCount, time);
+            GameManager.GameState.EventManager.TriggerEvent(EventKeys.CountdownEvents.OnCountdownTimesUp);
         }
     }
 }

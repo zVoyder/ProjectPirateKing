@@ -1,7 +1,7 @@
 ﻿namespace VUDK.Features.Main.EntitySystem
 {
     using UnityEngine;
-    using VUDK.Generic.Managers;
+    using VUDK.Generic.Managers.GameManager;
     using VUDK.Features.Main.EntitySystem.Interfaces;
     using VUDK.Features.Main.EventsSystem.Events;
 
@@ -33,7 +33,7 @@
             }
 
             //OnChangeHitPoints?.Invoke(hitDamage, CurrentHitPoints, MaxHitPoints);
-            GameManager.Instance.EventManager.TriggerEvent(EventKeys.EntityEvents.OnEntityInit, this);
+            GameManager.GameState.EventManager.TriggerEvent(EventKeys.EntityEvents.OnEntityInit, this);
         }
 
         public virtual void TakeDamage(float hitDamage = 1f)
@@ -49,7 +49,7 @@
             }
 
             //OnChangeHitPoints?.Invoke(hitDamage, CurrentHitPoints, MaxHitPoints);
-            GameManager.Instance.EventManager.TriggerEvent(EventKeys.EntityEvents.OnEntityTakeDamage, this);
+            GameManager.GameState.EventManager.TriggerEvent(EventKeys.EntityEvents.OnEntityTakeDamage, this);
 
         }
 
@@ -64,7 +64,7 @@
                 CurrentHitPoints = MaxHitPoints;
 
             //OnChangeHitPoints?.Invoke(healPoints, CurrentHitPoints, MaxHitPoints);
-            GameManager.Instance.EventManager.TriggerEvent(EventKeys.EntityEvents.OnEntityHeal, this);
+            GameManager.GameState.EventManager.TriggerEvent(EventKeys.EntityEvents.OnEntityHeal, this);
         }
 
         public void Death()
@@ -74,7 +74,7 @@
                 IsAlive = false;
                 DeathEffects();
                 //OnDeath?.Invoke();
-                GameManager.Instance.EventManager.TriggerEvent(EventKeys.EntityEvents.OnEntityDeath, this);
+                GameManager.GameState.EventManager.TriggerEvent(EventKeys.EntityEvents.OnEntityDeath, this);
             }
         }
 
