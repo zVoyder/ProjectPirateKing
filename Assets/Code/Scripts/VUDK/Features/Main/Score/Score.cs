@@ -1,9 +1,7 @@
 namespace VUDK.Features.Main.Score
 {
     using UnityEngine;
-    using VUDK.Generic.Managers.GameManager;
-    using VUDK.Features.Main.EventsSystem;
-    using VUDK.Features.Main.EventsSystem.Events;
+    using VUDK.Generic.Managers.GameManagers;
 
     public class Score : MonoBehaviour
     {
@@ -15,8 +13,8 @@ namespace VUDK.Features.Main.Score
 
         private void Start()
         {
-            GameManager.GameState.EventManager.TriggerEvent(EventKeys.ScoreEvents.OnScoreChange, ScoreValue);
-            GameManager.GameState.EventManager.TriggerEvent(EventKeys.ScoreEvents.OnHighScoreChange, HighScore);
+            MainManager.Ins.EventManager.TriggerEvent(EventKeys.ScoreEvents.OnScoreChange, ScoreValue);
+            MainManager.Ins.EventManager.TriggerEvent(EventKeys.ScoreEvents.OnHighScoreChange, HighScore);
         }
 
         public void ChangeScore(int scoreToAdd)
@@ -34,7 +32,7 @@ namespace VUDK.Features.Main.Score
             if (ScoreValue > HighScore)
             {
                 PlayerPrefs.SetInt(_scorePref, ScoreValue);
-                GameManager.GameState.EventManager.TriggerEvent(EventKeys.ScoreEvents.OnHighScoreChange, HighScore);
+                MainManager.Ins.EventManager.TriggerEvent(EventKeys.ScoreEvents.OnHighScoreChange, HighScore);
             }
         }
     }

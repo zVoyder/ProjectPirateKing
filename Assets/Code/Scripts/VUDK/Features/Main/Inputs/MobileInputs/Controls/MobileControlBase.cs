@@ -8,7 +8,8 @@
         public Vector2 InputDirection { get; protected set; }
 
         public Action<Vector2> OnInputDirection;
-        public Action OnInputCancelled; 
+        public Action OnInputCancelled;
+        public Action OnInputInvalid;
 
         protected abstract void CalculateInputDirection(Vector2 startingInputPosition);
     }

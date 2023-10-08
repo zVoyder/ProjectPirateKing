@@ -2,9 +2,9 @@
 {
     using UnityEngine;
     using VUDK.Features.Main.InputSysten.MobileInputs;
-    using VUDK.Generic.Managers.GameManager;
+    using VUDK.Generic.Managers.GameManagers;
 
-    public class PKGameState : GameState
+    public class PKGameManager : GameManager
     {
         [field: SerializeField, Header("Mobile Inputs")]
         public MobileInputsManager MobileInputsManager { get; private set; }

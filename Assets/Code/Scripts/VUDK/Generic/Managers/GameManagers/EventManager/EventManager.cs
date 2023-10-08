@@ -1,10 +1,9 @@
-﻿namespace VUDK.Features.Main.EventsSystem
+﻿namespace VUDK.Generic.Managers.GameManagers
 {
     using System;
     using System.Collections.Generic;
     using UnityEngine;
 
-    [DefaultExecutionOrder(-500)]
     public class EventManager : MonoBehaviour
     {
         private Dictionary<string, Delegate> s_EventListeners = new Dictionary<string, Delegate>();

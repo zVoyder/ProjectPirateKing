@@ -1,4 +1,4 @@
-﻿namespace VUDK.Constants
+﻿namespace VUDK.Config.Constants
 {
     public static class Constants 
     {

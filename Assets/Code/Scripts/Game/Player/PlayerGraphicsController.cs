@@ -1,17 +1,21 @@
 namespace ProjectPK.Player
 {
     using UnityEngine;
-    using ProjectPK.Constants;
     using ProjectPK.Player.Interfaces;
+    using ProjectPK.GameConfig.Constants;
+    using ProjectPK.Player.Manager;
 
     public class PlayerGraphicsController : MonoBehaviour, IPlayerComponent
     {
+        [SerializeField, Header("Graphics")]
+        private Animator _animator;
+        [SerializeField]
+        private SpriteRenderer _sprite;
+
         [SerializeField, Header("Flip Settings")]
-        private bool _defaultFlipX; 
+        private bool _invertFlipX;
 
         private PlayerManager _playerManager;
-        private Animator _anim;
-        private SpriteRenderer _sprite;
 
         /// <summary>
         /// Initializes the graphics of the player.
@@ -19,48 +23,41 @@ namespace ProjectPK.Player
         /// <param name="player"><see cref="PlayerManager"/> to initialize this Entity with.</param>
         public void Init(PlayerManager player)
         {
-            _anim = player.Animator;
-            _sprite = player.Sprite;
             _playerManager = player;
         }
 
         private void OnEnable()
         {
-            _playerManager.Movement.OnMovement += AnimateMovement;
-            //_playerManager.Entity.OnDeath += AnimateDeath;
+            // I don't put this in a Player State because the character MUST ALWAYS be facing the direction of the movement.
+            _playerManager.Movement.OnMovement += Flip;
         }
 
         private void OnDisable()
         {
-            _playerManager.Movement.OnMovement -= AnimateMovement;
-            //_playerManager.Entity.OnDeath -= AnimateDeath;
+            _playerManager.Movement.OnMovement -= Flip;
         }
 
         /// <summary>
         /// Aimates the movement with a direction.
         /// </summary>
         /// <param name="direction">Direction of the movement.</param>
-        private void AnimateMovement(Vector2 direction)
+        public void AnimateMovement(Vector2 direction)
         {
-            Flip(direction.x);
-            //_anim.SetFloat(AnimationConstants.s_PlayerMovement, direction);
+            _animator.SetFloat(Constants.PlayerAnimations.Movement, Mathf.Abs(direction.x));
         }
 
-        /// <summary>
-        /// Animates the death.
-        /// </summary>
-        //private void AnimateDeath()
-        //{
-        //    _anim.SetTrigger(Constants.AnimationConstants.s_PlayerDeath);
-        //}
+        public void AnimateIsJumping(bool isJumping)
+        {
+            _animator.SetBool(Constants.PlayerAnimations.IsJumping, isJumping);
+        }
 
         /// <summary>
         /// Flips the sprite X.
         /// </summary>
         /// <param name="direction">Facing direction.</param>
-        private void Flip(float direction)
+        public void Flip(Vector2 direction)
         {
-            _sprite.flipX = _defaultFlipX ? direction < 0f : direction > 0f;
+            _sprite.flipX = _invertFlipX ? direction.x < 0f : direction.x > 0f;
         }
     }
 }

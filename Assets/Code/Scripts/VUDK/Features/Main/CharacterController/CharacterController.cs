@@ -7,24 +7,28 @@
     {
         protected Rigidbody Rigidbody;
 
+        public override bool IsGrounded => Physics.CheckSphere(transform.position + GroundedOffset, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+        
         protected virtual void Awake()
         {
             TryGetComponent(out Rigidbody);
         }
 
-        protected override void StopCharacterOnPosition()
+        public override void StopCharacterOnPosition()
         {
             base.StopCharacterOnPosition();
             Rigidbody.velocity = new Vector3(0f, Rigidbody.velocity.y, 0f);
         }
 
-        protected override void Jump(Vector3 direction)
+        public override void Jump(Vector3 direction)
         {
+            if (!CanJump) return;
+
             base.Jump(direction);
             Rigidbody.AddForce(direction * JumpForce, ForceMode.Impulse);
         }
 
-        protected override void MoveCharacter(Vector2 direction)
+        public override void MoveCharacter(Vector2 direction)
         {
             base.MoveCharacter(direction);
 

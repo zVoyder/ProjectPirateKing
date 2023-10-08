@@ -1,9 +1,8 @@
 namespace VUDK.UI.Menu
 {
     using UnityEngine;
-    using VUDK.Generic.Managers.GameManager;
+    using VUDK.Generic.Managers.GameManagers;
     using VUDK.Generic.Utility;
-    using VUDK.Features.Main.EventsSystem.Events;
 
     [RequireComponent(typeof(SwitchScene))]
     public class UIMenuActions : MonoBehaviour
@@ -29,7 +28,7 @@ namespace VUDK.UI.Menu
 
         public void ClickButton()
         {
-            GameManager.GameState.EventManager.TriggerEvent(EventKeys.UIEvents.OnButtonClick);
+            MainManager.Ins.EventManager.TriggerEvent(EventKeys.UIEvents.OnButtonClick);
         }
     }
 }

@@ -1,8 +1,7 @@
 namespace VUDK.Features.Main.DialogueSystem
 {
     using UnityEngine;
-    using VUDK.Generic.Managers.GameManager;
-    using VUDK.Features.Main.EventsSystem.Events;
+    using VUDK.Generic.Managers.GameManagers;
     using VUDK.Features.Main.TriggerSystem;
 
     [RequireComponent(typeof(Collider))]
@@ -19,7 +18,7 @@ namespace VUDK.Features.Main.DialogueSystem
 
         public void TriggerDialogue()
         {
-            GameManager.GameState.EventManager.TriggerEvent(EventKeys.DialogueEvents.OnTriggeredDialouge, _dialogue);
+            MainManager.Ins.EventManager.TriggerEvent(EventKeys.DialogueEvents.OnTriggeredDialouge, _dialogue);
         }
     }
 }

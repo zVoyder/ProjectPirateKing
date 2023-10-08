@@ -63,7 +63,10 @@ namespace VUDK.Features.Main.InputSystem.MobileInputs
         protected override void CalculateInputDirection(Vector2 startingInputPosition)
         {
             if (IsDeadzone(startingInputPosition))
+            {
+                OnInputInvalid?.Invoke();
                 return;
+            }
 
             InputDirection = startingInputPosition / _rangeRadius;
             OnInputDirection?.Invoke(InputDirection);

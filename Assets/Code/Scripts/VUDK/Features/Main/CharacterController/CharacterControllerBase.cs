@@ -16,27 +16,30 @@
         [SerializeField]
         protected LayerMask GroundLayers;
         [SerializeField]
-        private float _groundedRadius;
+        protected float GroundedRadius;
 
         protected bool IsRunning;
         protected float CurrentSpeed;
-        protected Vector2 InputMove;
 
-        public bool IsGrounded => Physics.CheckSphere(transform.position + GroundedOffset, _groundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+        public Vector2 InputMove { get; private set; }
+        public abstract bool IsGrounded { get; }
         protected bool CanJump => IsGrounded;
 
         public event Action<Vector2> OnMovement;
+        public event Action OnStopMovement;
+        public event Action OnJump;
 
         protected virtual void Update()
         {
             MoveUpdateVelocity();
         }
 
+
         /// <summary>
         /// Moves the character in the specified direction at the setted speed using rigidbody velocity.
         /// </summary>
         /// <param name="direction">Direction.</param>
-        protected virtual void MoveCharacter(Vector2 direction)
+        public virtual void MoveCharacter(Vector2 direction)
         {
             InputMove = direction;
             OnMovement?.Invoke(direction);
@@ -46,35 +49,35 @@
         /// Makes the character jump in the specified direction at the setted jump force using rigidbody addforce.
         /// </summary>
         /// <param name="direction">Direction.</param>
-        protected virtual void Jump(Vector3 direction)
+        public virtual void Jump(Vector3 direction)
         {
-            if (!CanJump)
-                return;
+            OnJump?.Invoke();
         }
 
         /// <summary>
         /// Stops the character movement.
         /// </summary>
-        protected void StopCharacter()
+        public void StopCharacter()
         {
             InputMove = Vector2.zero;
             StopSprint();
+            OnStopMovement?.Invoke();
         }
 
         /// <summary>
         /// Immediately stops the character on its current position.
         /// </summary>
-        protected virtual void StopCharacterOnPosition()
+        public virtual void StopCharacterOnPosition()
         {
             StopCharacter();
         }
 
-        protected void Sprint()
+        public void Sprint()
         {
             IsRunning = true;
         }
 
-        protected void StopSprint()
+        public void StopSprint()
         {
             IsRunning = false;
         }
@@ -93,7 +96,7 @@
         private void DrawCheckGroundSphere()
         {
             Gizmos.color = new Color(0.0f, 1.0f, 0.0f, 0.35f);
-            Gizmos.DrawSphere(transform.position + GroundedOffset, _groundedRadius);
+            Gizmos.DrawSphere(transform.position + GroundedOffset, GroundedRadius);
         }
 #endif
     }

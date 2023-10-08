@@ -2,9 +2,7 @@
 {
     using UnityEngine;
     using TMPro;
-    using VUDK.Features.Main.EventsSystem;
-    using VUDK.Features.Main.EventsSystem.Events;
-    using VUDK.Generic.Managers.GameManager;
+    using VUDK.Generic.Managers.GameManagers;
 
     public class ScoreUI : MonoBehaviour
     {
@@ -20,14 +18,14 @@
 
         private void OnEnable()
         {
-            GameManager.GameState.EventManager.AddListener<int>(EventKeys.ScoreEvents.OnScoreChange, UpdateScoreText);
-            GameManager.GameState.EventManager.AddListener<int>(EventKeys.ScoreEvents.OnHighScoreChange, UpdateHighScoreText);
+            MainManager.Ins.EventManager.AddListener<int>(EventKeys.ScoreEvents.OnScoreChange, UpdateScoreText);
+            MainManager.Ins.EventManager.AddListener<int>(EventKeys.ScoreEvents.OnHighScoreChange, UpdateHighScoreText);
         }
 
         private void OnDisable()
         {
-            GameManager.GameState.EventManager.RemoveListener<int>(EventKeys.ScoreEvents.OnScoreChange, UpdateScoreText);
-            GameManager.GameState.EventManager.RemoveListener<int>(EventKeys.ScoreEvents.OnHighScoreChange, UpdateHighScoreText);
+            MainManager.Ins.EventManager.RemoveListener<int>(EventKeys.ScoreEvents.OnScoreChange, UpdateScoreText);
+            MainManager.Ins.EventManager.RemoveListener<int>(EventKeys.ScoreEvents.OnHighScoreChange, UpdateHighScoreText);
         }
 
         private void UpdateScoreText(int score)
