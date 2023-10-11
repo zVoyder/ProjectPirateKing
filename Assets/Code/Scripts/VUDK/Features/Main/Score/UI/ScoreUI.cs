@@ -2,7 +2,7 @@
 {
     using UnityEngine;
     using TMPro;
-    using VUDK.Generic.Managers.GameManagers;
+    using VUDK.Generic.Managers.Main;
 
     public class ScoreUI : MonoBehaviour
     {

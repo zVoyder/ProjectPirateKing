@@ -6,7 +6,7 @@ namespace VUDK.Features.Main.DialogueSystem
     using UnityEngine.Events;
     using UnityEngine.UI;
     using VUDK.Features.Main.DialogueSystem.Data;
-    using VUDK.Generic.Managers.GameManagers;
+    using VUDK.Generic.Managers.Main;
 
     public class DialogueManager : MonoBehaviour
     {

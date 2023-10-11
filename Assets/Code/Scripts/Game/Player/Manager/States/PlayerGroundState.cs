@@ -1,26 +1,27 @@
 ﻿namespace ProjectPK.Player.Manager.States
 {
+    using UnityEngine;
     using VUDK.Patterns.StateMachine;
     using ProjectPK.Player.Manager.Contexts;
-    using UnityEngine;
+    using System;
 
     public class PlayerGroundState : State<PlayerContext>
     {
-        public PlayerGroundState(StateMachine relatedStateMachine, Context context) : base(relatedStateMachine, context)
+        public PlayerGroundState(Enum stateKey, StateMachine relatedStateMachine, Context context) : base(stateKey, relatedStateMachine, context)
         {
         }
 
         public override void Enter()
         {
-            Context.Inputs.MobileDefaultControls.OnInputDirection += ChangeToJump;
+            Context.MovementInput.OnInputDirection += ChangeToJump;
         }
 
         public override void Exit()
         {
-            Context.Inputs.MobileDefaultControls.OnInputDirection -= ChangeToJump;
+            Context.MovementInput.OnInputDirection -= ChangeToJump;
         }
 
-        public override void PhysicsProcess()
+        public override void FixedProcess()
         {
         }
 

@@ -3,10 +3,11 @@
     using UnityEngine;
     using VUDK.Patterns.StateMachine;
     using ProjectPK.Player.Manager.Contexts;
+    using System;
 
     public class PlayerJumpState : State<PlayerContext>
     {
-        public PlayerJumpState(StateMachine relatedStateMachine, Context context) : base(relatedStateMachine, context)
+        public PlayerJumpState(Enum stateKey, StateMachine relatedStateMachine, Context context) : base(stateKey, relatedStateMachine, context)
         {
         }
 
@@ -21,7 +22,7 @@
         {
         }
 
-        public override void PhysicsProcess()
+        public override void FixedProcess()
         {
         }
 

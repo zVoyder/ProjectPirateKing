@@ -11,13 +11,13 @@
             switch (stateKey)
             {
                 case PlayerStateKey.Ground:
-                    return new PlayerGroundState(relatedStateMachine, context);
+                    return new PlayerGroundState(stateKey, relatedStateMachine, context);
 
                 case PlayerStateKey.Jump:
-                    return new PlayerJumpState(relatedStateMachine, context);
+                    return new PlayerJumpState(stateKey, relatedStateMachine, context);
 
                 case PlayerStateKey.Air:
-                    return new PlayerAirState(relatedStateMachine, context);
+                    return new PlayerAirState(stateKey, relatedStateMachine, context);
             }
 
             return null;

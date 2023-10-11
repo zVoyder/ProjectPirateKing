@@ -2,10 +2,11 @@
 {
     using VUDK.Patterns.StateMachine;
     using ProjectPK.Player.Manager.Contexts;
+    using System;
 
     public class PlayerAirState : State<PlayerContext>
     {
-        public PlayerAirState(StateMachine relatedStateMachine, Context context) : base(relatedStateMachine, context)
+        public PlayerAirState(Enum stateKey, StateMachine relatedStateMachine, Context context) : base(stateKey, relatedStateMachine, context)
         {
         }
 
@@ -18,7 +19,7 @@
             Context.Graphics.AnimateIsJumping(false);
         }
 
-        public override void PhysicsProcess()
+        public override void FixedProcess()
         {
         }
 

@@ -1,7 +1,7 @@
 namespace VUDK.UI.Menu
 {
     using UnityEngine;
-    using VUDK.Generic.Managers.GameManagers;
+    using VUDK.Generic.Managers.Main;
     using VUDK.Generic.Utility;
 
     [RequireComponent(typeof(SwitchScene))]

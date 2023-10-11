@@ -2,15 +2,18 @@ namespace ProjectPK.Player
 {
     using UnityEngine;
     using ProjectPK.Player.Interfaces;
-    using ProjectPK.GameConfig.Constants;
+    using ProjectPK.Config.Constants;
     using ProjectPK.Player.Manager;
+    using VUDK.Features.Main.InputSystem;
+    using UnityEngine.InputSystem;
+    using System;
 
     public class PlayerGraphicsController : MonoBehaviour, IPlayerComponent
     {
-        [SerializeField, Header("Graphics")]
-        private Animator _animator;
-        [SerializeField]
-        private SpriteRenderer _sprite;
+        [field: SerializeField, Header("Graphics")]
+        public Animator Animator { get; private set; }
+        [field: SerializeField]
+        public SpriteRenderer Sprite { get; private set; }
 
         [SerializeField, Header("Flip Settings")]
         private bool _invertFlipX;
@@ -43,21 +46,30 @@ namespace ProjectPK.Player
         /// <param name="direction">Direction of the movement.</param>
         public void AnimateMovement(Vector2 direction)
         {
-            _animator.SetFloat(Constants.PlayerAnimations.Movement, Mathf.Abs(direction.x));
+            Animator.SetFloat(Constants.PlayerAnimations.Movement, Mathf.Abs(direction.x));
         }
 
+        /// <summary>
+        /// Animates the jumping.
+        /// </summary>
+        /// <param name="isJumping">Animator Controller boolean isJumping.</param>
         public void AnimateIsJumping(bool isJumping)
         {
-            _animator.SetBool(Constants.PlayerAnimations.IsJumping, isJumping);
+            Animator.SetBool(Constants.PlayerAnimations.IsJumping, isJumping);
+        }
+
+        public void AnimateAttack()
+        {
+            Animator.SetTrigger(Constants.PlayerAnimations.Attack);
         }
 
         /// <summary>
         /// Flips the sprite X.
         /// </summary>
         /// <param name="direction">Facing direction.</param>
-        public void Flip(Vector2 direction)
+        private void Flip(Vector2 direction)
         {
-            _sprite.flipX = _invertFlipX ? direction.x < 0f : direction.x > 0f;
+            Sprite.flipX = _invertFlipX ? direction.x < 0f : direction.x > 0f;
         }
     }
 }

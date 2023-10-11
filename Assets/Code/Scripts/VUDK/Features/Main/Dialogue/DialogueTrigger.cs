@@ -1,7 +1,7 @@
 namespace VUDK.Features.Main.DialogueSystem
 {
     using UnityEngine;
-    using VUDK.Generic.Managers.GameManagers;
+    using VUDK.Generic.Managers.Main;
     using VUDK.Features.Main.TriggerSystem;
 
     [RequireComponent(typeof(Collider))]

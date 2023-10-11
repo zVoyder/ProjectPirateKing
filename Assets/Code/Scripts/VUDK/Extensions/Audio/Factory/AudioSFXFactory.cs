@@ -1,7 +1,7 @@
 namespace VUDK.Extensions.Audio.Factory
 {
     using UnityEngine;
-    using VUDK.Generic.Managers.GameManagers;
+    using VUDK.Generic.Managers.Main;
     using VUDK.Config.Constants;
 
     public static class AudioSFXFactory

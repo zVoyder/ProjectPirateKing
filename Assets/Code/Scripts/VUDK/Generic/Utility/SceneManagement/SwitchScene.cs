@@ -3,7 +3,7 @@ namespace VUDK.Generic.Utility
     using UnityEngine.SceneManagement;
     using UnityEngine;
     using System.Collections;
-    using VUDK.Generic.Managers.GameManagers;
+    using VUDK.Generic.Managers.Main;
 
     public class SwitchScene : MonoBehaviour
     {
